@@ -1,54 +1,57 @@
 import streamlit as st
 
-st.set_page_config(page_title="NumaX", page_icon="🎨", layout="centered")
+st.set_page_config(page_title="NumaX", page_icon="🎨", layout="centered", initial_sidebar_state="expanded")
 
-# CSS برای پس‌زمینه مشکی و فونت سفید
-st.markdown("""
+st.markdown(
+    '''
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
-    body {
-        background-color: #000000;
-        color: #FFFFFF;
-        font-family: 'Noto Sans', sans-serif;
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+    body, .main {
+        background-color: #121212;
+        color: #e0e0e0;
+        font-family: 'Playfair Display', serif;
     }
-    .stApp {
-        max-width: 600px;
-        margin: auto;
-        padding: 2rem;
-    }
-    h1 {
-        font-weight: 700;
+    .title {
+        font-weight: bold;
+        font-size: 36px;
         text-align: center;
-        margin-bottom: 0.2rem;
+        margin-bottom: 5px;
     }
-    p.subtitle {
+    .subtitle {
+        font-weight: bold;
+        font-size: 28px;
         text-align: center;
-        font-size: 1.2rem;
-        margin-top: 0;
-        margin-bottom: 2rem;
-        color: #bbbbbb;
-        font-style: italic;
+        color: #e0e0e0;
+        margin-bottom: 30px;
+    }
+    .sidebar .sidebar-content {
+        background-color: #1e1e1e;
+        color: #e0e0e0;
+    }
+    .footer {
+        text-align: center;
+        margin-top: 50px;
+        color: #888888;
+        font-size: 12px;
     }
     </style>
-""", unsafe_allow_html=True)
+    ''',
+    unsafe_allow_html=True
+)
 
-st.title("NumaX")
-st.markdown('<p class="subtitle">✨ NumaX — Where Emotion Finds Form</p>', unsafe_allow_html=True)
+st.markdown('<div class="title">Welcome to NumaX</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">NumaX — Where Emotion Finds Form</div>', unsafe_allow_html=True)
 
-# ورودی‌ها
-emotion = st.text_input("Enter your emotion:")
-style = st.text_input("Enter the artistic style:")
-color_palette = st.text_input("Enter color palette (comma separated):")
+emotion = st.text_input("Enter Emotion", placeholder="e.g. calm, energetic, mysterious")
+style = st.selectbox("Select Art Style", [
+    "Abstract", "Watercolor", "Oil Painting", "Digital Art", "Minimalist", "Cubism", "Pop Art", "Surrealism"
+])
+palette = st.selectbox("Select Color Palette", [
+    "Warm", "Cool", "Monochrome", "Pastel", "Vibrant", "Earth Tones", "Black & White"
+])
 
-if emotion or style or color_palette:
-    st.markdown("---")
-    st.subheader("Your Input:")
-    if emotion:
-        st.write(f"**Emotion:** {emotion}")
-    if style:
-        st.write(f"**Artistic Style:** {style}")
-    if color_palette:
-        st.write(f"**Color Palette:** {color_palette}")
+if st.button("Generate Image"):
+    st.success(f"Generating image with Emotion: '{emotion}', Style: '{style}', Palette: '{palette}' ...")
+    st.image("https://via.placeholder.com/512x512.png?text=Generated+Image", caption=f"Emotion: {emotion}, Style: {style}, Palette: {palette}")
 
-    # اینجا میتونی کد تولید تصویر رو اضافه کنی
-    st.info("Image generation feature will be added here soon.")
+st.markdown('<div class="footer">© 2025 NumaX Project by Pari Shojaienasab</div>', unsafe_allow_html=True)
